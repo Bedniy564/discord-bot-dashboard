@@ -1,0 +1,646 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #2a2a3d;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #3b3b5a;
+    padding-bottom: 10px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #b0b0c0;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #3b3b5a;
+    color: #ffffff;
+}
+
+.content {
+    flex: 1;
+    padding: 30px;
+    background-color: #252540;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: #2a2a3d;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    color: #ffffff;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-info span {
+    font-size: 1.1rem;
+    color: #b0b0c0;
+}
+
+.user-info a {
+    padding: 8px 15px;
+    background-color: #5865f2;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.user-info a:hover {
+    background-color: #4752c4;
+}
+
+.user-info img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #2a2a3d;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #b0b0c0;
+    margin-bottom: 10px;
+}
+
+.card button {
+    padding: 8px 15px;
+    background-color: #5865f2;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background-color 0.3s;
+}
+
+.card button:hover {
+    background-color: #4752c4;
+}
+
+.card ul {
+    list-style: none;
+}
+
+.card ul li {
+    font-size: 0.9rem;
+    color: #b0b0c0;
+    margin-bottom: 5px;
+}
+
+/* Стили для списка участников */
+#memberList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#memberList li {
+    background-color: #2a2a3d;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #e0e0e0;
+}
+
+#memberList li button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    background-color: #5865f2;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#memberList li button:hover {
+    background-color: #4752c4;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #1e1e2f;
+    padding: 20px;
+}
+
+.login-container h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.login-container p {
+    color: #b0b0c0;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
+}
+
+.discord-login-button {
+    padding: 12px 25px;
+    background-color: #5865f2;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.discord-login-button:hover {
+    background-color: #4752c4;
+}
+
+.admin-list {
+    margin: 20px 0;
+}
+
+.member-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #2f3136;
+    border-radius: 5px;
+    color: #ffffff;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: white;
+}
+
+.assign-button {
+    background-color: #5865F2;
+}
+
+.assign-button:hover {
+    background-color: #4752C4;
+}
+
+.remove-button {
+    background-color: #ED4245;
+}
+
+.remove-button:hover {
+    background-color: #D53437;
+}
+
+.demote-button {
+    background-color: #FFA500;
+}
+
+.demote-button:hover {
+    background-color: #E69500;
+}
+
+.promote-button {
+    background-color: #57F287;
+}
+
+.promote-button:hover {
+    background-color: #45C16B;
+}
+
+/* Стили для уведомлений */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.success {
+    background-color: #43b581;
+}
+
+.notification.error {
+    background-color: #f04747;
+}
+
+.notification.info {
+    background-color: #7289da;
+}
+
+/* Стили для состояний загрузки кнопок */
+button {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+button.loading {
+    padding-right: 40px;
+}
+
+button.loading::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Улучшенные стили для кнопок */
+.button-container button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 5px;
+}
+
+.button-container button:hover:not(:disabled) {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.button-container button:active:not(:disabled) {
+    transform: translateY(0);
+    filter: brightness(0.9);
+}
+
+/* Цвета кнопок в стиле Discord */
+.assign-button {
+    background-color: #7289da;
+}
+
+.remove-button {
+    background-color: #f04747;
+}
+
+.demote-button {
+    background-color: #faa61a;
+}
+
+.promote-button {
+    background-color: #43b581;
+}
+
+/* Стили для выпадающих списков */
+.role-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.role-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2f3136;
+    min-width: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.role-dropdown-content.show {
+    display: block;
+}
+
+/* Стили для поиска ролей */
+.role-search {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #40444b;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+}
+
+.role-search::placeholder {
+    color: #72767d;
+}
+
+/* Стили для списка ролей */
+.role-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.role-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.role-item:hover {
+    background-color: #36393f;
+}
+
+.role-checkbox {
+    margin-right: 8px;
+}
+
+.role-name {
+    flex-grow: 1;
+    color: white;
+}
+
+/* Стили для кнопок управления ролями */
+.manage-roles-button {
+    background-color: #7289da;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.manage-roles-button:hover {
+    background-color: #677bc4;
+}
+
+/* Стили для зависимостей ролей */
+.role-dependencies {
+    font-size: 12px;
+    color: #72767d;
+    margin-top: 4px;
+}
+
+/* Стили для тултипов */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #18191c;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1001;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.role-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.role-dialog-content {
+    background: #2f3136;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.role-dialog h3 {
+    margin: 0 0 20px 0;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.role-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.role-item {
+    padding: 10px;
+    background: #36393f;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.2s;
+}
+
+.role-item:hover {
+    background: #40444b;
+}
+
+.role-dependencies {
+    font-size: 0.9em;
+    color: #b9bbbe;
+    margin-top: 5px;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+.assign-button {
+    background-color: #5865f2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-button {
+    background-color: #ed4245;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.demote-button {
+    background-color: #faa61a;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+button:active {
+    filter: brightness(0.9);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 4px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1001;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+.notification.success {
+    background-color: #43b581;
+}
+
+.notification.error {
+    background-color: #f04747;
+}
+
+.notification.info {
+    background-color: #7289da;
+}

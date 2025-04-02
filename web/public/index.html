@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <h2>Меню</h2>
+        <a href="/index.html">Главная</a>
+        <a href="/moderators.html">Модераторы</a>
+        <a href="/admins.html">Администраторы</a>
+        <a href="/streamers.html">Стримеры</a>
+        <a href="/analytics.html">Аналитика</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>Панель управления командой сервера</h1>
+            <div class="user-info">
+                <img id="user-avatar" src="" alt="Аватар" style="display: none;">
+                <span id="user-name">Гость</span>
+                <a id="auth-button" href="/auth/discord">Войти через Discord</a>
+            </div>
+        </div>
+        <h2>Главная</h2>
+        <div class="dashboard">
+            <div class="card">
+                <h3>Обзор сервера</h3>
+                <p>Участников: <span id="member-count">Загрузка...</span></p>
+                <p>Активных ролей: <span id="role-count">Загрузка...</span></p>
+            </div>
+            <div class="card">
+                <h3>Быстрые действия</h3>
+                <button onclick="alert('Функция в разработке!')">Назначить роль</button>
+                <button onclick="alert('Функция в разработке!')">Изменить статус</button>
+            </div>
+            <div class="card">
+                <h3>Последние логи</h3>
+                <ul id="recent-logs">
+                    <li>Загрузка логов...</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

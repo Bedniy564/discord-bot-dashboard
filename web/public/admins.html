@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель управления - Администраторы</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <h2>Меню</h2>
+        <a href="/index.html">Главная</a>
+        <a href="/moderators.html">Модераторы</a>
+        <a href="/admins.html">Администраторы</a>
+        <a href="/streamers.html">Стримеры</a>
+        <a href="/analytics.html">Аналитика</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>Панель управления командой сервера</h1>
+            <div class="user-info">
+                <img id="user-avatar" src="" alt="Аватар" style="display: none;">
+                <span id="user-name">Гость</span>
+                <a id="auth-button" href="#" onclick="loginWithDiscord()">Войти через Discord</a>
+            </div>
+        </div>
+        <h2>Администраторы</h2>
+        <div id="adminList" class="admin-list"></div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
