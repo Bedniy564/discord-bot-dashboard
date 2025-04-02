@@ -1,3 +1,4 @@
+// server\src/userData.js
 const fs = require('fs');
 
 const userDataFile = './userData.json';

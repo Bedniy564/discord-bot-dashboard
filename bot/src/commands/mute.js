@@ -1,3 +1,4 @@
+// bot\src\commands\mute.js
 export default {
     name: 'mute',
     execute(message, args, client) {

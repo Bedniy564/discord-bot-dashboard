@@ -1,3 +1,4 @@
+// web\public/script.js
 let allMembers = [];
 let roleIds = null;
 let adminRoles = null;
@@ -105,88 +106,45 @@ async function loadAdminRoles() {
 }
 
 async function loadMembers() {
-    try {
-        console.log('Отправляем запрос на получение участников...');
-        console.log('URL запроса:', '/api/members/admins');
-        
-        const response = await fetch('/api/members/admins', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        });
-        console.log('Получен ответ:', response.status, response.statusText);
-        console.log('Заголовки ответа:', Object.fromEntries(response.headers.entries()));
-        
-        if (!response.ok) {
-            throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
-        }
-        
-        const text = await response.text();
-        console.log('Получен текст ответа:', text);
-        
-        let data;
-        try {
-            data = JSON.parse(text);
-        } catch (e) {
-            console.error('Ошибка парсинга JSON:', e);
-            throw new Error('Получены некорректные данные: не удалось распарсить JSON');
-        }
-        
-        console.log('Получены данные участников:', JSON.stringify(data, null, 2));
-        
-        if (!Array.isArray(data)) {
-            throw new Error('Получены некорректные данные: ожидался массив');
-        }
-        
-        // Проверяем и преобразуем данные участников
-        allMembers = data.map(member => {
-            if (!member || typeof member !== 'object') {
-                console.error('Некорректный формат участника:', member);
-                return null;
-            }
-            
-            return {
-                ...member,
-                id: member.id ? member.id.toString() : '',
-                roles: Array.isArray(member.roles) ? member.roles.map(role => ({
-                    ...role,
-                    id: role.id ? role.id.toString() : ''
-                })) : []
-            };
-        }).filter(member => member !== null);
-        
-        console.log(`Загружено ${allMembers.length} участников`);
-        
-        // Проверяем структуру ролей и ищем администраторов
-        console.log('\nПроверяем роли участников:');
-        allMembers.forEach(member => {
-            console.log(`\nУчастник ${member.name}:`);
-            console.log('ID:', member.id);
-            console.log('Роли:', member.roles);
-            
-            if (!Array.isArray(member.roles)) {
-                console.error(`- Некорректные роли:`, member.roles);
-                return;
-            }
-            
-            const adminRoles = member.roles.filter(role => 
-                roleIds && roleIds.Admin && roleIds.Admin.includes(role.id)
-            );
-            
-            if (adminRoles.length > 0) {
-                console.log(`- Найдены админские роли:`, adminRoles.map(r => `${r.name} (${r.id})`));
-            } else {
-                console.log('- Админских ролей нет');
-            }
-        });
-        
-        return allMembers;
-    } catch (err) {
-        console.error('Ошибка загрузки участников:', err);
-        allMembers = [];
-        throw err;
+  try {
+    console.log('Загрузка участников...');
+    const response = await fetch('/api/members/admins');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+
+    // Валидация данных
+    if (!Array.isArray(data)) {
+      throw new Error('Ожидался массив участников');
+    }
+
+    // Обработка каждого участника
+    allMembers = data.map(member => {
+      if (!member?.id) {
+        console.warn('Участник без ID:', member);
+        return null;
+      }
+
+      return {
+        id: member.id.toString(),
+        name: member.name || 'Unknown',
+        roles: (Array.isArray(member.roles) ? member.roles : []).map(role => ({
+          id: role?.id?.toString() || '',
+          name: role?.name || ''
+        }))
+      };
+    }).filter(Boolean);
+
+    console.log(`Успешно загружено ${allMembers.length} участников`);
+    return allMembers;
+  } catch (err) {
+    console.error('Ошибка загрузки участников:', err);
+    showNotification('Не удалось загрузить участников', 'error');
+    return [];
+  }
 }
 
 // Функции для управления ролями
@@ -390,33 +348,43 @@ async function updateData() {
 }
 
 // Модифицируем функции управления ролями
-async function assignRole(userId) {
-    const button = event.target;
-    try {
-        button.classList.add('loading');
-        button.disabled = true;
-
-        const response = await fetch('/api/roles/assign', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ userId })
-        });
-        
-        if (!response.ok) {
-            throw new Error('Ошибка при назначении роли');
-        }
-        
-        showNotification('Роль успешно назначена', 'success');
-        await updateData(); // Обновляем данные после действия
-    } catch (error) {
-        console.error('Ошибка при назначении роли:', error);
-        showNotification('Ошибка при назначении роли', 'error');
-    } finally {
-        button.classList.remove('loading');
-        button.disabled = false;
+async function assignRole(userId, roleName) {
+  try {
+    // Валидация входных данных
+    if (!userId || !roleName) {
+      throw new Error('Не указан ID пользователя или роль');
     }
+
+    // Показываем индикатор загрузки
+    const button = event.target;
+    button.disabled = true;
+    button.classList.add('loading');
+
+    // Подтверждение действия
+    const confirmed = confirm(`Назначить роль "${roleName}" пользователю?`);
+    if (!confirmed) return;
+
+    const response = await fetch('/api/roles/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId, role: roleName })
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Ошибка сервера');
+    }
+
+    showNotification(`Роль "${roleName}" успешно назначена`, 'success');
+    await updateData();
+  } catch (err) {
+    console.error('Ошибка назначения роли:', err);
+    showNotification(err.message, 'error');
+  } finally {
+    const button = event.target;
+    button.disabled = false;
+    button.classList.remove('loading');
+  }
 }
 
 async function deleteRole(userId) {

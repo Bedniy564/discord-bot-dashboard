@@ -1,3 +1,4 @@
+// bot\src\commands\ban.js
 export default {
     name: 'ban',
     execute(message, args, client) {

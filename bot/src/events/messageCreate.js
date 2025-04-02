@@ -1,3 +1,4 @@
+// bot\src\events\messageCreate.js
 export default {
     name: 'messageCreate',
     execute(message, client) {

@@ -1,3 +1,4 @@
+// server\src\websocket.js
 const { WebSocketServer } = require('ws');
 
 let botClient = null;
