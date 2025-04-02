@@ -1,0 +1,46 @@
+{
+  "guildId": "YOUR_SERVER_ID_HERE",
+  "roleIds": {
+    "Moderator": [
+      "MOD_ROLE_ID_1",
+      "MOD_ROLE_ID_2"
+    ],
+    "Admin": [
+      "ADMIN_ROLE_ID_1",
+      "ADMIN_ROLE_ID_2"
+    ]
+  },
+  "botToken": "DISCORD_BOT_TOKEN_HERE - NEVER COMMIT THIS!",
+  "adminRoles": [
+    {
+      "id": "BASE_MOD_ROLE_ID",
+      "name": "Мод.состав",
+      "dependencies": []
+    },
+    {
+      "id": "JUNIOR_MOD_ROLE_ID",
+      "name": "Мл.состав",
+      "dependencies": ["Мод.состав"]
+    }
+  ],
+  "whitelist": [
+    "YOUR_DISCORD_ID_1",
+    "YOUR_DISCORD_ID_2"
+  ],
+  "botPermissions": {
+    "intents": [
+      "Guilds",
+      "GuildMembers",
+      "GuildMessages",
+      "MessageContent",
+      "GuildPresences"
+    ],
+    "permissions": [
+      "VIEW_CHANNEL",
+      "MANAGE_ROLES",
+      "BAN_MEMBERS",
+      "KICK_MEMBERS",
+      "ADMINISTRATOR"
+    ]
+  }
+}
